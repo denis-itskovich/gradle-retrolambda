@@ -24,7 +24,6 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
-import org.gradle.api.tasks.SourceSet
 import org.gradle.api.tasks.incremental.IncrementalTaskInputs
 import org.gradle.util.VersionNumber
 
@@ -50,11 +49,11 @@ class RetrolambdaTask extends DefaultTask {
     @Input
     List<String> jvmArgs = []
     
-    SourceSet sourceSet
+    Closure<Boolean> isEnabled
     
     @TaskAction
     def execute(IncrementalTaskInputs inputs) {
-        if (sourceSet.allJava.isEmpty()) return
+        if (isEnabled != null && !isEnabled.call()) return
         
         RetrolambdaExtension retrolambda = project.retrolambda
         

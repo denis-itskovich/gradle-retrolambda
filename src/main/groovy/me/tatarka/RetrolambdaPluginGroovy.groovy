@@ -51,7 +51,8 @@ public class RetrolambdaPluginGroovy implements Plugin<Project> {
                         classpath = set.compileClasspath + project.files(newOutputDir)
                         javaVersion = project.retrolambda.javaVersion
                         jvmArgs = project.retrolambda.jvmArgs
-                        enabled = !set.allJava.isEmpty()
+                        isEnabled = { set.allJava.isEmpty() }
+                        enabled = true // !set.allJava.isEmpty()
                     }
 
                     project.tasks.findByName(set.classesTaskName).dependsOn(retrolambdaTask)
