@@ -17,14 +17,14 @@ buildscript {
 //apply plugin: "com.gradle.plugin-publish"
 apply plugin: 'groovy'
 apply plugin: 'maven'
-apply plugin: 'signing'
+//apply plugin: 'signing'
 
 repositories {
     mavenCentral()
 }
 
 group = 'me.tatarka'
-version = '3.2.3'
+version = '3.2.3-fix-134'
 
 sourceCompatibility = '1.6'
 
@@ -78,9 +78,9 @@ artifacts {
 //    }
 //}
 
-signing {
-    sign configurations.archives
-}
+//signing {
+//    sign configurations.archives
+//}
 
 if (project.hasProperty('sonatype.username') && project.hasProperty('sonatype.password')) {
     uploadArchives {
