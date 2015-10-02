@@ -24,6 +24,7 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
+import org.gradle.api.tasks.SourceSet
 import org.gradle.api.tasks.incremental.IncrementalTaskInputs
 import org.gradle.util.VersionNumber
 
@@ -34,7 +35,7 @@ import static me.tatarka.RetrolambdaPlugin.javaVersionToBytecode
  * Created by evan on 3/4/14.
  */
 class RetrolambdaTask extends DefaultTask {
-    @InputDirectory
+    //@InputDirectory
     File inputDir
 
     @OutputDirectory
@@ -49,8 +50,12 @@ class RetrolambdaTask extends DefaultTask {
     @Input
     List<String> jvmArgs = []
     
+    SourceSet sourceSet
+    
     @TaskAction
     def execute(IncrementalTaskInputs inputs) {
+        if (sourceSet.allJava.isEmpty()) return
+        
         RetrolambdaExtension retrolambda = project.retrolambda
         
         def changes = []
